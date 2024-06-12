@@ -68,6 +68,7 @@ logo = '''
                    |___/    '''
 GREEN = '\033[92m'
 RESET = '\033[0m'
+YELLOW = '\033[93m'
 
 # random choose a word
 import random
@@ -93,6 +94,10 @@ while not end_of_game and current_state < len(stages):
         print("You won!!!")
     # guess a letter (user input)
     guess = input("Guess a letter: (just 1 letter)\n").lower()
+    if guess in blank_list:
+        print(f"{YELLOW}You've already guess {guess}.{RESET}")
+        print(''.join(blank_list))
+        continue
 
     # replace if guess letter exists
     count = 0
