@@ -18,3 +18,5 @@ while quizbrain.still_has_question():
 
 print("You've completed the quiz.")
 print(f"Total: {quizbrain.score}/{quizbrain.q_number}.")
+
+# https://opentdb.com/api_config.php
