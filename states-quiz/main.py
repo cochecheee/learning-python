@@ -30,12 +30,10 @@ def processing_the_answer(answer_state, data):
             nums_of_correct_ans += 1
 
 while all_answers:
-    answer_state = screen.textinput(title=f"{nums_of_correct_ans}/50 states correct",prompt="What's another state's name?")
-    if answer_state is None:
+    answer_state = screen.textinput(title=f"{nums_of_correct_ans}/50 states correct",prompt="What's another state's name?, type 'Exit' to quit.")
+    if answer_state.title() == "Exit":
         break
 
     processing_the_answer(answer_state,data)
     if nums_of_correct_ans == 50:
         all_answers = False
-
-screen.exitonclick()
