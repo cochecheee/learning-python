@@ -1,0 +1,9 @@
+.github-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.github-title {
+  text-align: center;
+  margin: 1.2rem;
+}
