@@ -1,7 +1,9 @@
 from flask import Flask, render_template
+from flask import request
 import requests
 from datetime import datetime
 from post import Post
+from emailClass import SendEmail
 
 app = Flask(__name__)
 endpoint  = "https://gist.githubusercontent.com/cochecheee/1d0c69cc1693de8cbe26f7cf9928868c/raw/40bdb39af00cf1c9f01db569cf5765857b00413f/data.json"
@@ -29,10 +31,20 @@ def about():
     year = datetime.now().year
     return render_template('about.html',year=year)
 
-@app.route('/contact')
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
-    year = datetime.now().year
-    return render_template('contact.html',year=year)
+    if request.method == "POST":
+        data = request.form
+        print(data["name"])
+        print(data["email"])
+        print(data["phone"])
+        print(data["message"])
+        title = "Want to get in touch"
+        bodyContent = f"My name is {data['name']}. My email: {data['email']}. My phonenumber: {data['phone']}\n{data['message']} "
+        send_mail = SendEmail(title=title,contentBody=bodyContent)
+        send_mail.sendMain()
+        return render_template("contact.html", msg_sent=True)
+    return render_template("contact.html", msg_sent=False)
 
 @app.route("/post/<int:id>")
 def post(id):
@@ -40,6 +52,7 @@ def post(id):
         if post.id == id:
             blog_post = post
     return render_template('post.html', post = blog_post)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
