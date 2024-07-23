@@ -12,7 +12,10 @@ def home():
 @app.route('/login',methods=["POST"])
 def login():
     if req.method == 'POST':
-        return "💪 Success! Form submitted"
+        username = req.form['name']
+        password = req.form['password']
+        print(username +  password)
+        return f"💪 Success! Form submitted. Your username id {username} and password is {password}"
     else:
         return "<h1>Fail to make POST request to server</h1>"
 if __name__ == '__main__':
